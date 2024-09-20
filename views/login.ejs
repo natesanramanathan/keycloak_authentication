@@ -91,11 +91,18 @@
         display: <% if (error) { %>block<% } else { %>none<% } %>;
       }
 
+      .success {
+        color: green;
+        margin-top: 10px;
+        display: none; /* Hidden by default */
+      }
+
       .login-container p {
         margin-top: 20px;
         font-size: 14px;
         color: #666;
       }
+
       .font-big-icon {
         font-size: 70px !important;
       }
@@ -128,6 +135,8 @@
 
         <input type="submit" value="Login" />
         <div class="error" id="errorMsg"><%= error %></div>
+        <div class="success" id="successMsg"></div>
+        <!-- Added success message div -->
       </form>
       <p>Welcome back! Please login to your account.</p>
     </div>
@@ -148,6 +157,27 @@
         // Toggle the eye icon
         this.classList.toggle("fa-eye-slash");
       });
+
+      // Check for success message in query parameters
+      function getQueryParams() {
+        const params = {};
+        window.location.search
+          .substr(1)
+          .split("&")
+          .forEach(function (item) {
+            const [key, value] = item.split("=");
+            params[decodeURIComponent(key)] = decodeURIComponent(value);
+          });
+        return params;
+      }
+
+      // Show success message if present
+      const params = getQueryParams();
+      if (params.logout === "success") {
+        const successMsg = document.getElementById("successMsg");
+        successMsg.innerText = "Logged out successfully!";
+        successMsg.style.display = "block"; // Show the success message
+      }
     </script>
   </body>
 </html>

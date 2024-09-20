@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
+  const base_url = process.env.KEYCLOAK_API_BASE_URL;
   const client_id = process.env.KEYCLOAK_CLIENT_ID;
   const client_secret = process.env.KEYCLOAK_CLIENT_SECRET;
   const grant_type = process.env.KEYCLOAK_GRANT_TYPE;
@@ -37,15 +38,11 @@ app.post("/login", async (req, res) => {
     params.append("username", username);
     params.append("password", password);
 
-    const tokenResponse = await axios.post(
-      "http://localhost:8080/realms/Bluebinaries/protocol/openid-connect/token",
-      params,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    );
+    const tokenResponse = await axios.post(`${base_url}/token`, params, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
 
     const accessToken = tokenResponse.data.access_token;
 
@@ -114,8 +111,8 @@ app.post("/logout", async (req, res) => {
       }
     );
 
-    // After successful logout, redirect to the login page
-    res.redirect("/");
+    // After successful logout, redirect to the login page with a success message
+    res.redirect("/?logout=success");
   } catch (error) {
     console.error(
       "Error during logout:",

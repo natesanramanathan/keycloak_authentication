@@ -46,6 +46,7 @@ Before running this project, you need the following installed:
    Create a `.env` file at the root of your project and add the following:
 
    ```bash
+   KEYCLOAK_API_BASE_URL=your-keycloak-api-base-url
    KEYCLOAK_CLIENT_ID=your-client-id
    KEYCLOAK_CLIENT_SECRET=your-client-secret
    KEYCLOAK_GRANT_TYPE=password
@@ -121,6 +122,7 @@ The following environment variables are required for this application:
 
 | Variable                 | Description                                          |
 | ------------------------ | ---------------------------------------------------- |
+| `KEYCLOAK_API_BASE_URL`  | Keycloak API BASE URL.                               |
 | `KEYCLOAK_CLIENT_ID`     | The client ID of your Keycloak client.               |
 | `KEYCLOAK_CLIENT_SECRET` | The client secret of your Keycloak client.           |
 | `KEYCLOAK_GRANT_TYPE`    | The grant type used for authentication (`password`). |
