@@ -8,7 +8,7 @@ This project demonstrates how to integrate **Keycloak** authentication into a **
 - Securely handles `access_token`, `refresh_token`, and user session management.
 - Displays user details on the dashboard after successful login.
 - Implements logout functionality via Keycloak's logout API.
-- Uses environment variables for sensitive configurations such as `client_id`, `client_secret`, and `grant_type`.
+- Uses environment variables for sensitive configurations such as `api_base_url`, `client_id`, `client_secret`, and `grant_type`.
 
 ## Technologies
 
