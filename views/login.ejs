@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keycloak Authentication :: Login Page</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #e0f7fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .login-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        text-align: center;
+        position: relative;
+      }
+
+      .login-container h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .login-container i {
+        font-size: 15px;
+        color: #5cb85c;
+        margin-bottom: 20px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+
+      .password-wrapper {
+        position: relative;
+      }
+
+      .password-wrapper input[type="password"],
+      .password-wrapper input[type="text"] {
+        padding-right: 40px; /* Make space for the eye icon */
+      }
+
+      .password-wrapper .show-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #888;
+      }
+
+      input[type="submit"] {
+        background-color: #5cb85c;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #4cae4c;
+      }
+
+      .error {
+        color: red;
+        margin-top: 10px;
+        display: <% if (error) { %>block<% } else { %>none<% } %>;
+      }
+
+      .login-container p {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #666;
+      }
+      .font-big-icon {
+        font-size: 70px !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <i class="fas fa-user-circle font-big-icon"></i>
+      <!-- User Icon -->
+      <h2>Login</h2>
+      <form id="loginForm" action="/login" method="POST">
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Username"
+          required
+        /><br />
+
+        <div class="password-wrapper">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <i class="fas fa-eye show-password" id="togglePassword"></i>
+        </div>
+
+        <input type="submit" value="Login" />
+        <div class="error" id="errorMsg"><%= error %></div>
+      </form>
+      <p>Welcome back! Please login to your account.</p>
+    </div>
+
+    <script>
+      // Toggle password visibility
+      const togglePassword = document.querySelector("#togglePassword");
+      const passwordField = document.querySelector("#password");
+
+      togglePassword.addEventListener("click", function () {
+        // Toggle the type attribute
+        const type =
+          passwordField.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordField.setAttribute("type", type);
+
+        // Toggle the eye icon
+        this.classList.toggle("fa-eye-slash");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+      .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 50%;
+        margin: 0 auto;
+      }
+      h2 {
+        color: #333;
+      }
+      pre {
+        background-color: #e0e0e0;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .logout-button {
+        background-color: #d9534f;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Welcome, you are logged in!</h2>
+      <p><strong>Access Token:</strong></p>
+      <pre><%= accessToken %></pre>
+
+      <p><strong>Token Type:</strong> <%= tokenType %></p>
+      <p><strong>Expires In:</strong> <%= expiresIn %> seconds</p>
+      <p><strong>Refresh Token:</strong></p>
+      <pre><%= refreshToken %></pre>
+
+      <h3>User Information</h3>
+      <pre><%= JSON.stringify(userInfo, null, 2) %></pre>
+
+      <form action="/logout" method="POST">
+        <!-- Include refreshToken as hidden input -->
+        <input type="hidden" name="refreshToken" value="<%= refreshToken %>" />
+        <button type="submit" class="logout-button">Logout</button>
+      </form>
+    </div>
+  </body>
+</html>
