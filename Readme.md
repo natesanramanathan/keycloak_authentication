@@ -54,7 +54,7 @@ Before running this project, you need the following installed:
 
 4. **Start the application:**
    ```bash
-   npm start
+   npm start or node app.js
    ```
 
 ## Application Structure
