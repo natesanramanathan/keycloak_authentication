@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
     introspectParams.append("token", accessToken);
 
     const introspectResponse = await axios.post(
-      "http://localhost:8080/realms/Bluebinaries/protocol/openid-connect/token/introspect",
+      `${base_url}/token/introspect`,
       introspectParams,
       {
         headers: {
@@ -91,6 +91,7 @@ app.post("/login", async (req, res) => {
 app.post("/logout", async (req, res) => {
   const { refreshToken } = req.body;
 
+  const base_url = process.env.KEYCLOAK_API_BASE_URL;
   const client_id = process.env.KEYCLOAK_CLIENT_ID;
   const client_secret = process.env.KEYCLOAK_CLIENT_SECRET;
 
@@ -100,16 +101,12 @@ app.post("/logout", async (req, res) => {
     logoutParams.append("client_id", client_id);
     logoutParams.append("client_secret", client_secret);
     logoutParams.append("refresh_token", refreshToken);
-
-    await axios.post(
-      "http://localhost:8080/realms/Bluebinaries/protocol/openid-connect/logout",
-      logoutParams,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    );
+    //  "http://localhost:8080/realms/Bluebinaries/protocol/openid-connect/logout",
+    await axios.post(`${base_url}/logout`, logoutParams, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
 
     // After successful logout, redirect to the login page with a success message
     res.redirect("/?logout=success");
