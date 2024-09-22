@@ -35,6 +35,44 @@
         border-radius: 5px;
         cursor: pointer;
       }
+      #userInfoSection {
+        display: none;
+        margin-top: 10px;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+      .header h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+      }
+      .arrow {
+        margin-left: 10px;
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid #333;
+        transition: transform 0.3s ease;
+      }
+      .arrow.down {
+        transform: rotate(180deg);
+      }
+      fieldset {
+        border: 2px solid #ccc;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      legend {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        padding: 0 10px;
+      }
     </style>
   </head>
   <body>
@@ -48,14 +86,41 @@
       <p><strong>Refresh Token:</strong></p>
       <pre><%= refreshToken %></pre>
 
-      <h3>User Information</h3>
-      <pre><%= JSON.stringify(userInfo, null, 2) %></pre>
+      <!-- Header with drop arrow -->
+      <div class="header" onclick="toggleUserInfo()">
+        <h3>Show More</h3>
+        <div class="arrow" id="arrow"></div>
+      </div>
+
+      <!-- Fieldset with User Information -->
+      <fieldset id="userInfoSection">
+        <legend>User Information</legend>
+        <pre><%= JSON.stringify(userInfo, null, 2) %></pre>
+      </fieldset>
 
       <form action="/logout" method="POST">
-        <!-- Include refreshToken as hidden input -->
         <input type="hidden" name="refreshToken" value="<%= refreshToken %>" />
         <button type="submit" class="logout-button">Logout</button>
       </form>
     </div>
+
+    <script>
+      function toggleUserInfo() {
+        const userInfoSection = document.getElementById("userInfoSection");
+        const arrow = document.getElementById("arrow");
+
+        // Toggle the display of the user info section
+        if (
+          userInfoSection.style.display === "none" ||
+          userInfoSection.style.display === ""
+        ) {
+          userInfoSection.style.display = "block";
+          arrow.classList.add("down"); // Change the arrow direction
+        } else {
+          userInfoSection.style.display = "none";
+          arrow.classList.remove("down");
+        }
+      }
+    </script>
   </body>
 </html>
