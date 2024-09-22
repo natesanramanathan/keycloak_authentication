@@ -4,6 +4,9 @@ const path = require("path");
 const axios = require("axios");
 const dotenv = require("dotenv");
 
+// SKIP IF THE CLIENT APPLICATION HOSTED WITH VALID SSL CERTIFICATE
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 dotenv.config();
 
 const app = express();
