@@ -135,7 +135,7 @@ The following environment variables are required for this application:
    npm start
    ```
 
-2. Navigate to `http://localhost:3000/` in your browser to access the login page.
+2. Navigate to `http://localhost:3000/` in your browser to access the login page. On cloud, http://20.40.48.171:3030/
 
 3. After successful login, you will be redirected to the dashboard, where you can see your user details.
 
