@@ -104,7 +104,6 @@ app.post("/logout", async (req, res) => {
     logoutParams.append("client_id", client_id);
     logoutParams.append("client_secret", client_secret);
     logoutParams.append("refresh_token", refreshToken);
-    //  "http://localhost:8080/realms/Bluebinaries/protocol/openid-connect/logout",
     await axios.post(`${base_url}/logout`, logoutParams, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
